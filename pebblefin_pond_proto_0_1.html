@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Pebblefin Pond Prototype 0.1</title>
+<style>
+  :root{
+    --bg:#d9f4ff;
+    --sky:#aee8ff;
+    --water:#63c8da;
+    --water2:#3aa6c0;
+    --bank:#82b85d;
+    --dock:#8a5b35;
+    --ink:#17323d;
+    --panel:rgba(255,255,255,.92);
+    --accent:#ffb72b;
+    --danger:#e64d4d;
+    --good:#39a86b;
+    --purple:#8b5cf6;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    margin:0;
+    font-family: ui-rounded, "SF Pro Rounded", "SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:linear-gradient(#bfefff,#eafaff);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  button{font:inherit}
+  #app{
+    max-width:520px;
+    margin:0 auto;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(#b8ecff 0 38%, #62c9db 38% 100%);
+    position:relative;
+    overflow:hidden;
+  }
+  .topbar{
+    padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    align-items:center;
+    gap:10px;
+    z-index:5;
+  }
+  .title{
+    font-weight:900;
+    letter-spacing:.3px;
+    font-size:22px;
+    text-shadow:0 2px 0 rgba(255,255,255,.45);
+  }
+  .pill{
+    background:rgba(255,255,255,.9);
+    border:2px solid rgba(23,50,61,.12);
+    border-radius:999px;
+    padding:8px 11px;
+    font-weight:800;
+    box-shadow:0 4px 0 rgba(23,50,61,.08);
+    white-space:nowrap;
+  }
+  .xpbar{
+    margin:0 16px 8px;
+    background:rgba(255,255,255,.75);
+    border:2px solid rgba(23,50,61,.12);
+    border-radius:14px;
+    height:20px;
+    overflow:hidden;
+    position:relative;
+    z-index:4;
+  }
+  .xpfill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#ffd059,#ff9f1c);
+    transition:width .35s ease;
+  }
+  .xplabel{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:900;
+  }
+  .scene{
+    position:relative;
+    min-height:530px;
+    flex:1;
+    overflow:hidden;
+  }
+  .hill{
+    position:absolute;
+    top:38px;
+    width:250px;height:150px;
+    background:#75b25d;
+    border-radius:50%;
+    opacity:.85;
+  }
+  .hill.h1{left:-90px}
+  .hill.h2{right:-110px;top:58px;background:#67a954}
+  .tree{
+    position:absolute;
+    width:44px;height:95px;
+    bottom:260px;
+  }
+  .tree:before{
+    content:"";
+    position:absolute;left:18px;bottom:0;
+    width:10px;height:42px;background:#7d4f2f;border-radius:6px;
+  }
+  .tree:after{
+    content:"";
+    position:absolute;left:0;top:0;
+    width:44px;height:55px;background:#4e9a52;border-radius:45% 55% 48% 52%;
+    box-shadow:-17px 18px 0 -7px #4e9a52, 16px 17px 0 -8px #4e9a52;
+  }
+  .tree.t1{left:18px}
+  .tree.t2{right:26px;transform:scale(.85)}
+  .water{
+    position:absolute;left:0;right:0;bottom:0;height:62%;
+    background:
+      repeating-radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.15) 0 2px,transparent 3px 26px),
+      linear-gradient(#72d5e2,#39a6c0);
+  }
+  .dock{
+    position:absolute;
+    left:50%;transform:translateX(-50%);
+    bottom:115px;
+    width:210px;height:95px;
+    background:repeating-linear-gradient(90deg,#9b683c 0 28px,#87552f 29px 31px);
+    clip-path:polygon(12% 0,88% 0,100% 100%,0 100%);
+    border-top:7px solid #714526;
+  }
+  .character{
+    position:absolute;
+    left:50%;transform:translateX(-50%);
+    bottom:180px;
+    width:100px;height:160px;
+    z-index:3;
+  }
+  .head{
+    position:absolute;left:27px;top:4px;
+    width:46px;height:46px;background:#f0b47d;border-radius:50%;
+    border:3px solid rgba(23,50,61,.25);
+  }
+  .hat{
+    position:absolute;left:16px;top:-6px;width:68px;height:26px;
+    background:#315c67;border-radius:50% 50% 35% 35%;
+  }
+  .body{
+    position:absolute;left:23px;top:47px;width:54px;height:72px;
+    background:#f26b4b;border-radius:18px 18px 12px 12px;
+    border:3px solid rgba(23,50,61,.18);
+  }
+  .legs{
+    position:absolute;left:29px;top:112px;width:42px;height:48px;
+    border-left:12px solid #334d58;
+    border-right:12px solid #334d58;
+  }
+  .arm{
+    position:absolute;left:66px;top:62px;width:44px;height:12px;
+    background:#f0b47d;border-radius:10px;transform:rotate(-22deg);
+    transform-origin:left center;
+  }
+  .rod{
+    position:absolute;
+    left:101px;top:62px;
+    width:150px;height:4px;background:#50341f;
+    transform:rotate(-28deg);transform-origin:left center;
+    border-radius:4px;
+  }
+  .line{
+    position:absolute;
+    width:2px;background:rgba(245,250,255,.95);
+    left:240px;top:4px;height:250px;
+    transform-origin:top;
+    transition:.5s ease;
+  }
+  .bobber{
+    position:absolute;
+    width:18px;height:18px;border-radius:50%;
+    background:linear-gradient(#ff4c4c 0 50%,white 50% 100%);
+    border:2px solid rgba(23,50,61,.25);
+    left:231px;top:247px;
+    transition:.35s ease;
+  }
+  .bobber.bite{animation:bob .35s infinite alternate}
+  @keyframes bob{to{transform:translateY(18px) scale(.9)}}
+  .splash{
+    position:absolute;left:210px;top:260px;
+    font-size:54px;opacity:0;transform:scale(.6);
+  }
+  .splash.show{animation:splash .65s ease}
+  @keyframes splash{0%{opacity:1;transform:scale(.5)}70%{opacity:1;transform:scale(1.2)}100%{opacity:0;transform:scale(1.6)}}
+  .status{
+    position:absolute;left:50%;transform:translateX(-50%);
+    top:145px;width:88%;
+    text-align:center;
+    background:rgba(255,255,255,.85);
+    border:2px solid rgba(23,50,61,.12);
+    border-radius:18px;
+    padding:12px 16px;
+    font-weight:900;
+    box-shadow:0 5px 0 rgba(23,50,61,.08);
+    z-index:4;
+  }
+  .status small{display:block;font-size:12px;opacity:.7;margin-top:3px}
+  .hearts{
+    display:flex;gap:5px;justify-content:center;margin-top:8px;font-size:21px;
+  }
+  .actionbar{
+    position:absolute;
+    left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 16px);
+    display:flex;gap:12px;align-items:end;z-index:6;
+  }
+  .baitbox{
+    background:var(--panel);
+    border:2px solid rgba(23,50,61,.12);
+    border-radius:18px;
+    padding:10px 12px;
+    min-width:108px;
+    box-shadow:0 5px 0 rgba(23,50,61,.08);
+    font-weight:900;
+  }
+  .baitbox span{display:block;font-size:12px;opacity:.65}
+  #actionBtn{
+    flex:1;
+    min-height:68px;
+    border:none;
+    border-radius:22px;
+    font-size:25px;
+    font-weight:1000;
+    color:#17323d;
+    background:linear-gradient(#ffd65a,#ffb322);
+    box-shadow:0 8px 0 #d88e0f;
+    border:3px solid rgba(255,255,255,.45);
+    transition:.08s transform,.08s box-shadow,.2s background;
+  }
+  #actionBtn:active{transform:translateY(5px);box-shadow:0 3px 0 #d88e0f}
+  #actionBtn.hook{background:linear-gradient(#ff7f66,#f14c43);box-shadow:0 8px 0 #b33431;color:white}
+  #actionBtn.reel{background:linear-gradient(#73e295,#32b76a);box-shadow:0 8px 0 #20884c;color:#103f2a}
+  #actionBtn:disabled{filter:grayscale(.5);opacity:.7}
+  .catchOverlay{
+    position:absolute;inset:0;
+    background:rgba(10,35,45,.72);
+    display:none;
+    align-items:center;justify-content:center;
+    padding:24px;
+    z-index:20;
+  }
+  .catchOverlay.show{display:flex}
+  .catchCard{
+    width:100%;
+    background:#fff8e7;
+    border-radius:28px;
+    padding:24px;
+    text-align:center;
+    border:4px solid #e7cf9f;
+    box-shadow:0 18px 50px rgba(0,0,0,.3);
+    animation:pop .35s ease;
+  }
+  @keyframes pop{from{transform:scale(.72);opacity:0}to{transform:scale(1);opacity:1}}
+  .catchArt{
+    width:170px;height:145px;
+    margin:5px auto 10px;
+    position:relative;
+    display:flex;align-items:center;justify-content:center;
+    font-size:80px;
+  }
+  .rarity{
+    font-size:13px;font-weight:1000;letter-spacing:1.5px;
+    text-transform:uppercase;margin-bottom:5px;
+  }
+  .catchName{font-size:34px;font-weight:1000;margin:0}
+  .catchMeta{font-weight:900;font-size:18px;margin-top:8px}
+  .newTag{
+    display:none;
+    background:#ffcf4d;color:#5a3a00;
+    font-weight:1000;padding:7px 10px;border-radius:999px;
+    margin:0 auto 8px;width:max-content;
+  }
+  .newTag.show{display:block}
+  .rewardRow{
+    display:flex;gap:10px;justify-content:center;margin-top:16px;
+  }
+  .reward{
+    background:white;border:2px solid #e8dcc2;border-radius:16px;
+    padding:10px 14px;font-weight:1000;
+  }
+  #againBtn{
+    width:100%;margin-top:18px;min-height:54px;border:none;border-radius:17px;
+    background:#315c67;color:white;font-weight:1000;font-size:19px;
+    box-shadow:0 5px 0 #203f47;
+  }
+  .levelup{
+    position:absolute;
+    top:95px;left:50%;transform:translateX(-50%) translateY(-10px);
+    background:#fff8d6;border:3px solid #ffc642;
+    padding:10px 18px;border-radius:16px;font-weight:1000;
+    opacity:0;z-index:50;pointer-events:none;
+  }
+  .levelup.show{animation:level 1.6s ease}
+  @keyframes level{0%{opacity:0;transform:translateX(-50%) translateY(-12px) scale(.9)}20%,75%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}100%{opacity:0}}
+  .debugNote{
+    position:absolute;right:10px;bottom:92px;
+    font-size:10px;color:rgba(255,255,255,.85);z-index:2;
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <div class="title">Pebblefin Pond</div>
+    <div class="pill">🪙 <span id="coins">100</span></div>
+    <div class="pill">Lv <span id="level">0</span></div>
+  </div>
+
+  <div class="xpbar">
+    <div class="xpfill" id="xpFill"></div>
+    <div class="xplabel"><span id="xpText">0 / 50 XP</span></div>
+  </div>
+
+  <div class="scene">
+    <div class="hill h1"></div><div class="hill h2"></div>
+    <div class="tree t1"></div><div class="tree t2"></div>
+    <div class="water"></div>
+    <div class="dock"></div>
+
+    <div class="status" id="statusBox">
+      Ready to fish.
+      <small id="statusSmall">Starter Rod • Starter Bait</small>
+      <div class="hearts" id="hearts"></div>
+    </div>
+
+    <div class="character">
+      <div class="hat"></div>
+      <div class="head"></div>
+      <div class="body"></div>
+      <div class="legs"></div>
+      <div class="arm"></div>
+      <div class="rod"></div>
+      <div class="line" id="line"></div>
+      <div class="bobber" id="bobber"></div>
+      <div class="splash" id="splash">💦</div>
+    </div>
+
+    <div class="actionbar">
+      <div class="baitbox"><span>Starter Bait</span>🪱 <b id="bait">20</b></div>
+      <button id="actionBtn">CAST</button>
+    </div>
+
+    <div class="debugNote">Prototype 0.1</div>
+
+    <div class="catchOverlay" id="catchOverlay">
+      <div class="catchCard">
+        <div class="newTag" id="newTag">NEW SPECIES!</div>
+        <div class="rarity" id="catchRarity">BASIC</div>
+        <div class="catchArt" id="catchArt">🐟</div>
+        <h2 class="catchName" id="catchName">Pebblit</h2>
+        <div class="catchMeta" id="catchMeta">0.7 lb • New record!</div>
+        <div class="rewardRow">
+          <div class="reward">🪙 +<span id="catchCoins">4</span></div>
+          <div class="reward">⭐ +<span id="catchXP">5</span> XP</div>
+        </div>
+        <button id="againBtn">FISH AGAIN</button>
+      </div>
+    </div>
+
+    <div class="levelup" id="levelup">LEVEL UP!</div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const el = id => document.getElementById(id);
+
+  const creatures = [
+    {
+      id:1,name:"Pebblit",rarity:"Basic",weight:48,
+      coin:[3,6],xp:5,lb:[0.2,1.1],hits:[1,1],emoji:"🐟"
+    },
+    {
+      id:2,name:"Mudskip",rarity:"Basic",weight:34,
+      coin:[4,7],xp:6,lb:[0.4,1.8],hits:[1,2],emoji:"🐡"
+    },
+    {
+      id:5,name:"Paddlerib",rarity:"Uncommon",weight:14,
+      coin:[9,15],xp:10,lb:[1.5,5.0],hits:[2,3],emoji:"🐸"
+    },
+    {
+      id:8,name:"Vertijaw",rarity:"Rare",weight:4,
+      coin:[35,55],xp:30,lb:[6,18],hits:[4,5],emoji:"👹"
+    }
+  ];
+
+  const rarityColors = {
+    Basic:"#667b84",
+    Uncommon:"#2c9c5c",
+    Rare:"#5b61d6"
+  };
+
+  const state = {
+    coins:100,bait:20,xp:0,level:0,xpNeed:50,
+    phase:"ready",fish:null,hitsNeeded:0,hitsDone:0,hearts:3,
+    discovered:new Set(),records:{},
+    biteTimer:null,windowTimer:null,promptTimer:null,
+    firstCatch:true
+  };
+
+  const xpNeeds = [50,80,125,190,285,425,625,900,1275,1750];
+
+  function rand(min,max){ return Math.random()*(max-min)+min; }
+  function randInt(min,max){ return Math.floor(rand(min,max+1)); }
+
+  function weightedFish(){
+    if(state.firstCatch) return creatures[0];
+    const total = creatures.reduce((s,c)=>s+c.weight,0);
+    let r = Math.random()*total;
+    for(const c of creatures){ r -= c.weight; if(r<=0) return c; }
+    return creatures[0];
+  }
+
+  function setStatus(main,sub){
+    el("statusBox").childNodes[0].nodeValue = main;
+    el("statusSmall").textContent = sub || "";
+  }
+
+  function renderHearts(){
+    el("hearts").innerHTML = "";
+    if(state.phase!=="fight"){ el("hearts").style.display="none"; return; }
+    el("hearts").style.display="flex";
+    for(let i=0;i<3;i++){
+      const s=document.createElement("span");
+      s.textContent = i < state.hearts ? "❤️" : "🖤";
+      el("hearts").appendChild(s);
+    }
+  }
+
+  function render(){
+    el("coins").textContent = state.coins;
+    el("bait").textContent = state.bait;
+    el("level").textContent = state.level;
+    el("xpText").textContent = `${state.xp} / ${state.xpNeed} XP`;
+    el("xpFill").style.width = Math.min(100,(state.xp/state.xpNeed)*100)+"%";
+    renderHearts();
+
+    const btn=el("actionBtn");
+    btn.classList.remove("hook","reel");
+    btn.disabled=false;
+
+    if(state.phase==="ready"){
+      btn.textContent="CAST";
+      setStatus("Ready to fish.","Starter Rod • Starter Bait");
+      if(state.bait<=0){
+        btn.disabled=true;
+        btn.textContent="OUT OF BAIT";
+        setStatus("No bait left.","Prototype refill: reload the page");
+      }
+    } else if(state.phase==="waiting"){
+      btn.textContent="WAIT...";
+      btn.disabled=true;
+      setStatus("Watching the bobber...","Something could bite any second.");
+    } else if(state.phase==="hook"){
+      btn.textContent="HOOK!";
+      btn.classList.add("hook");
+      setStatus("BITE!","Tap before it gets away!");
+    } else if(state.phase==="fight"){
+      btn.textContent="HOLD...";
+      btn.disabled=true;
+      setStatus(`Fish on! ${state.hitsDone}/${state.hitsNeeded}`,"Wait for the REEL prompt.");
+    } else if(state.phase==="reel"){
+      btn.textContent="REEL!";
+      btn.classList.add("reel");
+      setStatus(`REEL! ${state.hitsDone}/${state.hitsNeeded}`,"Tap now!");
+    }
+  }
+
+  function clearTimers(){
+    clearTimeout(state.biteTimer);
+    clearTimeout(state.windowTimer);
+    clearTimeout(state.promptTimer);
+  }
+
+  function splash(){
+    const s=el("splash");
+    s.classList.remove("show");
+    void s.offsetWidth;
+    s.classList.add("show");
+  }
+
+  function cast(){
+    if(state.bait<=0) return;
+    clearTimers();
+    state.bait--;
+    state.fish=weightedFish();
+    state.phase="waiting";
+    state.hearts=3;
+    state.hitsDone=0;
+    state.hitsNeeded=randInt(state.fish.hits[0],state.fish.hits[1]);
+    el("bobber").classList.remove("bite");
+    splash();
+    render();
+
+    const biteDelay=rand(1200,4200);
+    state.biteTimer=setTimeout(()=>{
+      state.phase="hook";
+      el("bobber").classList.add("bite");
+      render();
+      if(navigator.vibrate) navigator.vibrate(60);
+      state.windowTimer=setTimeout(()=>escapeFish("Too slow! The fish stole your bait."),1200);
+    },biteDelay);
+  }
+
+  function hook(){
+    clearTimeout(state.windowTimer);
+    el("bobber").classList.remove("bite");
+    state.phase="fight";
+    render();
+    scheduleReel();
+  }
+
+  function scheduleReel(){
+    clearTimeout(state.promptTimer);
+    state.promptTimer=setTimeout(()=>{
+      state.phase="reel";
+      render();
+      if(navigator.vibrate) navigator.vibrate(35);
+      state.windowTimer=setTimeout(()=>missReel(),950);
+    },rand(650,1650));
+  }
+
+  function reel(){
+    clearTimeout(state.windowTimer);
+    state.hitsDone++;
+    splash();
+    if(navigator.vibrate) navigator.vibrate(20);
+    if(state.hitsDone>=state.hitsNeeded){
+      catchFish();
+    }else{
+      state.phase="fight";
+      render();
+      scheduleReel();
+    }
+  }
+
+  function missReel(){
+    state.hearts--;
+    if(navigator.vibrate) navigator.vibrate([80,50,80]);
+    if(state.hearts<=0){
+      escapeFish("SNAP! The fish got away.");
+      return;
+    }
+    state.phase="fight";
+    setStatus(`Missed! ${state.hitsDone}/${state.hitsNeeded}`,"Your line took damage.");
+    renderHearts();
+    setTimeout(scheduleReel,500);
+  }
+
+  function escapeFish(msg){
+    clearTimers();
+    state.phase="ready";
+    state.fish=null;
+    el("bobber").classList.remove("bite");
+    setStatus(msg,"Cast again when you're ready.");
+    renderHearts();
+
+    const btn=el("actionBtn");
+    btn.textContent="CAST AGAIN";
+    btn.disabled=false;
+    btn.classList.remove("hook","reel");
+  }
+
+  function catchFish(){
+    clearTimers();
+    const f=state.fish;
+    state.firstCatch=false;
+
+    const weight=rand(f.lb[0],f.lb[1]);
+    const pct=(weight-f.lb[0])/(f.lb[1]-f.lb[0] || 1);
+    const coin=Math.round(f.coin[0]+pct*(f.coin[1]-f.coin[0]));
+    const wasNew=!state.discovered.has(f.id);
+    state.discovered.add(f.id);
+    const oldRecord=state.records[f.id] || 0;
+    const isRecord=weight>oldRecord;
+    if(isRecord) state.records[f.id]=weight;
+
+    state.coins += coin;
+    gainXP(f.xp);
+
+    el("newTag").classList.toggle("show",wasNew);
+    el("catchRarity").textContent=f.rarity;
+    el("catchRarity").style.color=rarityColors[f.rarity] || "#555";
+    el("catchArt").textContent=f.emoji;
+    el("catchName").textContent=f.name;
+    el("catchMeta").textContent=`${weight.toFixed(2)} lb${isRecord ? " • NEW RECORD!" : ""}`;
+    el("catchCoins").textContent=coin;
+    el("catchXP").textContent=f.xp;
+    el("catchOverlay").classList.add("show");
+    state.phase="caught";
+  }
+
+  function gainXP(amount){
+    state.xp += amount;
+    let leveled=false;
+    while(state.xp>=state.xpNeed){
+      state.xp -= state.xpNeed;
+      state.level++;
+      state.xpNeed = xpNeeds[state.level] || Math.round(50 + 18*Math.pow(state.level+1,2));
+      leveled=true;
+      state.coins += 50 + state.level*10;
+    }
+    if(leveled){
+      const lu=el("levelup");
+      lu.textContent=`LEVEL ${state.level}! +${50+state.level*10} 🪙`;
+      lu.classList.remove("show");
+      void lu.offsetWidth;
+      lu.classList.add("show");
+    }
+  }
+
+  el("actionBtn").addEventListener("click",()=>{
+    if(state.phase==="ready") cast();
+    else if(state.phase==="hook") hook();
+    else if(state.phase==="reel") reel();
+  });
+
+  el("againBtn").addEventListener("click",()=>{
+    el("catchOverlay").classList.remove("show");
+    state.phase="ready";
+    state.fish=null;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
