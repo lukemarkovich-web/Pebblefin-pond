@@ -530,6 +530,7 @@ button{font-family:inherit}
 .menuBtn:nth-child(2){--nav:#ffd85e}
 .menuBtn:nth-child(3){--nav:#97ea52}
 .menuBtn:nth-child(4){--nav:#b28cff}
+.menuBtn:nth-child(5){--nav:#ff9f6e}
 .menuBtn:before{
   content:"";position:absolute;inset:4px;border-radius:10px;
   background:radial-gradient(circle at 35% 20%,rgba(255,255,255,.16),transparent 42%),
@@ -828,6 +829,12 @@ button:active{filter:brightness(1.08)}
   #action{width:68px!important;height:68px!important}
 }
 
+
+/* ===== v0.8.0-r1 WORLD MASTERY ===== */
+.masteryHero{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(145deg,#173a42,#0d2831);border:2px solid rgba(122,220,194,.25);border-radius:20px;padding:14px 15px;margin-bottom:14px;box-shadow:0 5px 0 rgba(0,0,0,.12)}
+.masteryHero b{display:block;font-size:15px;letter-spacing:.5px;color:#effffd}.masteryHero small{display:block;color:#a9c9c6;font-weight:800;font-size:10px;margin-top:4px}.masteryRing{width:52px;height:52px;flex:0 0 52px;border-radius:50%;display:grid;place-items:center;background:#09212a;border:4px solid #62d3b8;color:#effffd;font-size:12px;font-weight:1000}
+.masteryTier{margin:12px 0 16px}.masteryTier.locked{opacity:.58}.masteryTierHead{display:flex;align-items:end;justify-content:space-between;padding:0 3px 7px;color:#e9fffb;font-weight:1000;font-size:12px;letter-spacing:.6px}.masteryTierHead small{font-size:8px;color:#83aaa7;letter-spacing:.5px}.masteryTier.unlocked .masteryTierHead small{color:#72ddb8}.masteryList{display:grid;gap:9px}.masteryCard{background:linear-gradient(145deg,#17333b,#10272f);border:2px solid rgba(255,255,255,.08);border-radius:18px;padding:11px 12px;position:relative;overflow:hidden;box-shadow:0 4px 0 rgba(0,0,0,.12)}.masteryCard.ready{border-color:#74d85d;background:linear-gradient(145deg,#183d38,#12342e)}.masteryCard.claimed{border-color:rgba(98,211,184,.32)}.masteryCard.locked{filter:saturate(.65)}
+.masteryTop{display:flex;gap:10px;align-items:flex-start}.masteryNum{width:34px;height:34px;flex:0 0 34px;border-radius:11px;background:#09212a;display:grid;place-items:center;color:#70dbc0;font-weight:1000;font-size:12px}.masteryInfo{flex:1;min-width:0}.masteryName{color:#f1fffd;font-size:14px;font-weight:1000;line-height:1.12}.masteryReq{color:#a8c7c5;font-size:10px;font-weight:750;line-height:1.3;margin-top:3px}.masteryProgress{height:10px;background:#071e27;border-radius:999px;overflow:hidden;margin-top:9px;border:1px solid rgba(255,255,255,.08)}.masteryFill{height:100%;background:linear-gradient(90deg,#55d6bb,#a0e64d);transition:width .2s}.masteryFoot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px}.masteryNumbers{font-size:9px;color:#9ebfbd;font-weight:1000}.masteryReward{font-size:9px;color:#dff8f3;font-weight:1000;text-align:right}.masteryClaim{width:100%;margin-top:9px;border:0;border-radius:12px;min-height:36px;background:#66d34b;box-shadow:0 3px 0 #3ea42c;color:#17333e;font-size:11px;font-weight:1000}.masteryStamp{position:absolute;right:9px;top:8px;color:#6dd6bd;font-size:8px;font-weight:1000;letter-spacing:.7px}.beyondMastery{display:flex;align-items:center;gap:12px;margin:8px 0 20px;padding:13px;border-radius:18px;background:linear-gradient(135deg,#1d2638,#2e2140,#173b3b);border:2px solid rgba(211,176,255,.22)}.beyondIcon{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#0b1721;color:#e5caff;font-weight:1000;font-size:20px}.beyondMastery b{display:block;color:#f4eaff;font-size:12px;letter-spacing:1px}.beyondMastery small{display:block;color:#baa9c8;font-size:9px;font-weight:800;margin-top:3px}.beyondMastery.revealed{border-color:rgba(255,215,92,.4)}
 </style>
 
 <!-- Pebblefin Pond PWA -->
@@ -848,11 +855,12 @@ button:active{filter:brightness(1.08)}
    <div class="pill levelPill"><small>RANK</small><b id="level">0</b></div>
  </div>
  <div class="xp"><div class="xpfill" id="xpfill"></div><div class="xplabel" id="xplabel">0 / 50 XP</div></div>
- <div class="version">v0.7.1</div>
+ <div class="version">v0.8.0-r1</div>
  <div class="menuBtns">
    <button class="menuBtn" id="collectionBtn" aria-label="Collection"><span class="navGlyph">◆</span><small>FISH</small></button>
    <button class="menuBtn" id="shopBtn" aria-label="Shop"><span class="navGlyph">¤</span><small>SHOP</small></button>
    <button class="menuBtn" id="challengesBtn" aria-label="Challenges"><span class="navGlyph">◎</span><small>GOALS</small><span class="menuNotify" id="challengeMenuBadge" aria-label="Challenges ready"></span></button>
+   <button class="menuBtn" id="masteryBtn" aria-label="World Mastery"><span class="navGlyph">★</span><small>MASTER</small><span class="menuNotify" id="masteryMenuBadge" aria-label="Mastery rewards ready"></span></button>
    <button class="menuBtn" id="settingsBtn" aria-label="Settings"><span class="navGlyph">⚙</span><small>MORE</small></button>
  </div>
  <div class="skyline"></div><div class="farwater"><div class="wave w1"></div><div class="wave w2"></div><div class="wave w3"></div></div>
@@ -926,6 +934,16 @@ button:active{filter:brightness(1.08)}
  <div class="systemOverlay" id="challengesOverlay">
   <div class="sysHeader"><button class="sysBack" id="challengesBack">‹</button><div><div class="sysEyebrow">POND MISSIONS</div><div class="sysTitle">Challenges</div><div class="sysSub">3 ACTIVE SLOTS • WORLD 1</div></div><div class="sysCoins">🪙 <span id="challengeCoins">100</span></div></div>
   <div class="sysBody"><div class="challengeSummary"><div>🎯 Pond Challenges<small>Complete objectives for bonus coins & XP.</small></div><span id="challengeReadyCount">0/3</span></div><div class="challengeList" id="challengeList"></div><div class="challengeHint">Completed challenges can be claimed for rewards. A claimed slot refreshes in 1 hour, or you can replace a difficult active challenge instantly with coins.</div></div>
+ </div>
+ <div class="systemOverlay" id="masteryOverlay">
+  <div class="sysHeader"><button class="sysBack" id="masteryBack">‹</button><div><div class="sysEyebrow">WORLD 1 PROGRESSION</div><div class="sysTitle">World Mastery</div><div class="sysSub">PEBBLEFIN POND • PERMANENT</div></div><div class="sysCoins">★ <span id="masteryCount">0</span>/15</div></div>
+  <div class="sysBody">
+   <div class="masteryHero"><div><b>PEBBLEFIN POND</b><small id="masteryHeroSub">Begin your mastery journey.</small></div><div class="masteryRing" id="masteryPct">0%</div></div>
+   <div class="masteryTier" id="masteryTier1"><div class="masteryTierHead"><span>Ⅰ • POND EXPLORER</span><small>MASTERIES 1–5</small></div><div class="masteryList" id="masteryList1"></div></div>
+   <div class="masteryTier" id="masteryTier2"><div class="masteryTierHead"><span>Ⅱ • SEASONED ANGLER</span><small id="masteryTier2State">COMPLETE TIER I</small></div><div class="masteryList" id="masteryList2"></div></div>
+   <div class="masteryTier" id="masteryTier3"><div class="masteryTierHead"><span>Ⅲ • POND MASTER</span><small id="masteryTier3State">COMPLETE TIER II</small></div><div class="masteryList" id="masteryList3"></div></div>
+   <div class="beyondMastery" id="beyondMastery"><div class="beyondIcon">?</div><div><b>BEYOND MASTERY</b><small id="beyondText">Something beneath the pond...</small></div></div>
+  </div>
  </div>
 <div class="systemOverlay" id="settingsOverlay">
    <div class="sysHeader"><button class="sysBack" id="settingsBack">‹</button><div><div class="sysEyebrow">GAME OPTIONS</div><div class="sysTitle">Settings</div><div class="sysSub">GAME • AUDIO • DATA</div></div><div class="sysCoins">⚙️</div></div>
@@ -1002,10 +1020,10 @@ const xpNeeds=[50,80,125,190,285,425,625,900,1275,1750];
 const rand=(a,b)=>Math.random()*(b-a)+a;
 const rint=(a,b)=>Math.floor(rand(a,b+1));
 
-function defaultSave(){return{coins:100,xp:0,level:0,xpNeed:50,first:true,discovered:[],records:{},counts:{},baitInventory:{starter:20,grub:0},equippedBait:"starter",ownedRods:["twig"],equippedRod:"twig",challenges:[]}}
+function defaultSave(){return{saveVersion:8,coins:100,xp:0,level:0,xpNeed:50,first:true,discovered:[],records:{},counts:{},baitInventory:{starter:20,grub:0},equippedBait:"starter",ownedRods:["twig"],equippedRod:"twig",challenges:[],masteryStats:{},masteryClaims:[],cosmetics:{unlocked:[]}}}
 function loadSave(){
  const d=defaultSave();
- try{const raw=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem(OLD_SAVE_KEY)||localStorage.getItem(OLDER_SAVE_KEY)||"null");if(raw&&typeof raw==="object")return Object.assign(d,raw,{baitInventory:Object.assign(d.baitInventory,raw.baitInventory||{}),records:raw.records||{},counts:raw.counts||{},ownedRods:Array.isArray(raw.ownedRods)?raw.ownedRods:["twig"],challenges:Array.isArray(raw.challenges)?raw.challenges:[]})}catch(e){}
+ try{const raw=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem(OLD_SAVE_KEY)||localStorage.getItem(OLDER_SAVE_KEY)||"null");if(raw&&typeof raw==="object"){const merged=Object.assign(d,raw,{baitInventory:Object.assign(d.baitInventory,raw.baitInventory||{}),records:raw.records||{},counts:raw.counts||{},ownedRods:Array.isArray(raw.ownedRods)?raw.ownedRods:["twig"],challenges:Array.isArray(raw.challenges)?raw.challenges:[],masteryStats:raw.masteryStats||{},masteryClaims:Array.isArray(raw.masteryClaims)?raw.masteryClaims:[],cosmetics:Object.assign({unlocked:[]},raw.cosmetics||{})}); merged.saveVersion=8; return merged}}catch(e){}
  return d
 }
 const saved=loadSave();
@@ -1017,14 +1035,67 @@ function applySettings(){document.getElementById("game").classList.toggle("reduc
 function haptic(pattern=18){if(settings.haptics&&navigator.vibrate)navigator.vibrate(pattern)}
 const S={
  phase:"ready",coins:saved.coins,xp:saved.xp,level:saved.level,xpNeed:saved.xpNeed,first:saved.first,
- found:new Set(saved.discovered||[]),records:saved.records||{},counts:saved.counts||{},baitInventory:saved.baitInventory,equippedBait:saved.equippedBait||"starter",ownedRods:new Set(saved.ownedRods||["twig"]),equippedRod:saved.equippedRod||"twig",challenges:saved.challenges||[],challengeSeq:0,
+ found:new Set(saved.discovered||[]),records:saved.records||{},counts:saved.counts||{},baitInventory:saved.baitInventory,equippedBait:saved.equippedBait||"starter",ownedRods:new Set(saved.ownedRods||["twig"]),equippedRod:saved.equippedRod||"twig",challenges:saved.challenges||[],challengeSeq:0,masteryStats:saved.masteryStats||{},masteryClaims:new Set(saved.masteryClaims||[]),cosmetics:saved.cosmetics||{unlocked:[]},
  f:null,weight:0,need:0,done:0,hearts:3,bobX:0,bobY:0,t1:null,t2:null,markerRaf:null,castRaf:null,fightRaf:null,rigRaf:null,
  last:0,pos:.1,dir:1,center:.5,width:.4,speed:.8,baseWidth:.34,baseSpeed:1.2,fightT:0,pull:0,reelKick:0,missKick:0,biteKick:0,castP:0,pullSide:1,pullStrength:0,roundStart:0,inputLocked:false,levelQueue:[],pendingCatchCard:false,menuOpen:false,fightBaseX:0,fightBaseY:0,fishOffsetX:0,fishOffsetY:0,fishTargetX:0,fishTargetY:0,fishNextTurn:0,fightLast:0,targetBaseCenter:.5,targetPhase:Math.random()*Math.PI*2
 };
-function save(){localStorage.setItem(SAVE_KEY,JSON.stringify({coins:S.coins,xp:S.xp,level:S.level,xpNeed:S.xpNeed,first:S.first,discovered:[...S.found],records:S.records,counts:S.counts,baitInventory:S.baitInventory,equippedBait:S.equippedBait,ownedRods:[...S.ownedRods],equippedRod:S.equippedRod,challenges:S.challenges}))}
+function save(){localStorage.setItem(SAVE_KEY,JSON.stringify({saveVersion:8,coins:S.coins,xp:S.xp,level:S.level,xpNeed:S.xpNeed,first:S.first,discovered:[...S.found],records:S.records,counts:S.counts,baitInventory:S.baitInventory,equippedBait:S.equippedBait,ownedRods:[...S.ownedRods],equippedRod:S.equippedRod,challenges:S.challenges,masteryStats:S.masteryStats,masteryClaims:[...S.masteryClaims],cosmetics:S.cosmetics}))}
 function activeBait(){return baitDefs[S.equippedBait]||baitDefs.starter}
 function activeRod(){return rodDefs[S.equippedRod]||rodDefs.twig}
 function baitCount(){return S.baitInventory[S.equippedBait]||0}
+
+const masteryDefs=[
+ {id:1,tier:1,name:"Pond Regular",req:"Catch 50 total fish",reward:{coins:125,xp:75}},
+ {id:2,tier:1,name:"Know the Shallows",req:"Discover every Basic species",reward:{coins:150,bait:{id:"starter",qty:5}}},
+ {id:3,tier:1,name:"Moving Up",req:"Catch 20 Uncommon creatures",reward:{coins:150,xp:100}},
+ {id:4,tier:1,name:"Old Reliable",req:"Catch 75 fish with Starter Bait",reward:{coins:175,bait:{id:"grub",qty:5}}},
+ {id:5,tier:1,name:"Pond Explorer",req:"125 catches + discover every Uncommon",reward:{coins:200,cosmetic:"Pebble Bobber"}},
+ {id:6,tier:2,name:"Clean Landing",req:"Land 75 clean catches with Pondcaster",reward:{coins:225,xp:150}},
+ {id:7,tier:2,name:"Rare Hunter",req:"Catch 30 Rare creatures",reward:{coins:250,bait:{id:"grub",qty:5}}},
+ {id:8,tier:2,name:"Grub Specialist",req:"Catch 100 fish using Juicy Grub",reward:{coins:275,xp:175}},
+ {id:9,tier:2,name:"Rare Collector",req:"Discover all 5 Rares + catch 40 Rares",reward:{coins:300,bait:{id:"grub",qty:10}}},
+ {id:10,tier:2,name:"Seasoned Angler",req:"Discover every Rare + 300 total catches",reward:{coins:350,cosmetic:"Ancient Wood Rod Skin"}},
+ {id:11,tier:3,name:"Purple Water",req:"Catch 2 Epic creatures",reward:{coins:400,xp:250}},
+ {id:12,tier:3,name:"Battle Tested",req:"Catch 100 Rare-or-better creatures",reward:{coins:450,bait:{id:"grub",qty:10}}},
+ {id:13,tier:3,name:"Epic Angler",req:"Catch 3 Epic creatures",reward:{coins:500,xp:350}},
+ {id:14,tier:3,name:"Legend of the Pond",req:"Catch Ancient Snap",reward:{coins:500,cosmetic:"Ancient Snap Bobber"}},
+ {id:15,tier:3,name:"PEBBLEFIN MASTER",req:"Complete #1–14 + discover all 19 non-Beyond species",reward:{cosmetic:"Pebblefin Master Character",badge:"Pebblefin Master Badge"}}
+];
+function freshMasteryStats(){return{total:0,byRarity:{},byBait:{starter:0,grub:0},cleanPondcaster:0,rarePlus:0,ancientSnap:0,pondEater:0}}
+function ensureMasteryData(){
+ const m=Object.assign(freshMasteryStats(),S.masteryStats||{});m.byRarity=Object.assign({},m.byRarity||{});m.byBait=Object.assign({starter:0,grub:0},m.byBait||{});
+ const historicalTotal=Object.values(S.counts||{}).reduce((a,b)=>a+Number(b||0),0);m.total=Math.max(Number(m.total||0),historicalTotal);
+ for(const f of fish){const n=Number(S.counts[f.id]||0);m.byRarity[f.rarity]=Math.max(Number(m.byRarity[f.rarity]||0),Object.entries(S.counts||{}).filter(([id])=>(fish.find(x=>x.id===Number(id))||{}).rarity===f.rarity).reduce((a,[,v])=>a+Number(v||0),0))}
+ m.rarePlus=Math.max(Number(m.rarePlus||0),["Rare","Epic","Legendary","Beyond"].reduce((a,r)=>a+Number(m.byRarity[r]||0),0));m.ancientSnap=Math.max(Number(m.ancientSnap||0),Number(S.counts[19]||0));m.pondEater=Math.max(Number(m.pondEater||0),Number(S.counts[20]||0));S.masteryStats=m;
+ if(!S.cosmetics||typeof S.cosmetics!=="object")S.cosmetics={unlocked:[]};if(!Array.isArray(S.cosmetics.unlocked))S.cosmetics.unlocked=[];
+}
+function rarityFoundCount(r){return fish.filter(f=>f.rarity===r&&S.found.has(f.id)).length}
+function masteryState(id){
+ ensureMasteryData();const m=S.masteryStats,basicN=fish.filter(f=>f.rarity==="Basic").length,uncN=fish.filter(f=>f.rarity==="Uncommon").length,rareN=fish.filter(f=>f.rarity==="Rare").length,nonBeyond=fish.filter(f=>f.rarity!=="Beyond").length;
+ const prior14=id===15?masteryDefs.slice(0,14).every(d=>masteryComplete(d.id)):false;
+ switch(id){
+  case 1:return{value:m.total,target:50,complete:m.total>=50};case 2:{const v=rarityFoundCount("Basic");return{value:v,target:basicN,complete:v>=basicN}}
+  case 3:{const v=Number(m.byRarity.Uncommon||0);return{value:v,target:20,complete:v>=20}}case 4:{const v=Number(m.byBait.starter||0);return{value:v,target:75,complete:v>=75}}
+  case 5:{const a=Math.min(m.total,125),b=rarityFoundCount("Uncommon");return{value:a+b,target:125+uncN,label:`${m.total}/125 catches • ${b}/${uncN} Uncommons`,complete:m.total>=125&&b>=uncN}}
+  case 6:{const v=Number(m.cleanPondcaster||0);return{value:v,target:75,complete:v>=75}}case 7:{const v=Number(m.byRarity.Rare||0);return{value:v,target:30,complete:v>=30}}
+  case 8:{const v=Number(m.byBait.grub||0);return{value:v,target:100,complete:v>=100}}case 9:{const a=rarityFoundCount("Rare"),b=Number(m.byRarity.Rare||0);return{value:Math.min(a,rareN)+Math.min(b,40),target:rareN+40,label:`${a}/${rareN} Rares found • ${b}/40 caught`,complete:a>=rareN&&b>=40}}
+  case 10:{const a=rarityFoundCount("Rare");return{value:Math.min(a,rareN)+Math.min(m.total,300),target:rareN+300,label:`${a}/${rareN} Rares found • ${m.total}/300 catches`,complete:a>=rareN&&m.total>=300}}
+  case 11:{const v=Number(m.byRarity.Epic||0);return{value:v,target:2,complete:v>=2}}case 12:{const v=Number(m.rarePlus||0);return{value:v,target:100,complete:v>=100}}case 13:{const v=Number(m.byRarity.Epic||0);return{value:v,target:3,complete:v>=3}}
+  case 14:{const v=Number(m.ancientSnap||0);return{value:Math.min(v,1),target:1,label:v?"Ancient Snap caught":"Not yet caught",complete:v>=1}}
+  case 15:{const found=fish.filter(f=>f.rarity!=="Beyond"&&S.found.has(f.id)).length;return{value:(prior14?14:masteryDefs.slice(0,14).filter(d=>masteryComplete(d.id)).length)+found,target:14+nonBeyond,label:`${masteryDefs.slice(0,14).filter(d=>masteryComplete(d.id)).length}/14 masteries • ${found}/${nonBeyond} species`,complete:prior14&&found>=nonBeyond}}
+ }
+ return{value:0,target:1,complete:false}
+}
+function masteryComplete(id){if(id===15){const found=fish.filter(f=>f.rarity!=="Beyond"&&S.found.has(f.id)).length;return masteryDefs.slice(0,14).every(d=>masteryState(d.id).complete)&&found>=19}return masteryState(id).complete}
+function masteryTierUnlocked(t){if(t===1)return true;if(t===2)return masteryDefs.filter(d=>d.tier===1).every(d=>masteryComplete(d.id));return masteryDefs.filter(d=>d.tier<=2).every(d=>masteryComplete(d.id))}
+function masteryRewardText(r){const a=[];if(r.coins)a.push(`🪙 ${r.coins}`);if(r.xp)a.push(`✨ ${r.xp} XP`);if(r.bait)a.push(`${baitDefs[r.bait.id]?.icon||"🪱"} ×${r.bait.qty}`);if(r.cosmetic)a.push(`🎨 ${r.cosmetic}`);if(r.badge)a.push(`🏅 ${r.badge}`);return a.join(" • ")}
+function updateMasteryForCatch(ctx){ensureMasteryData();const m=S.masteryStats;m.total++;m.byRarity[ctx.fish.rarity]=Number(m.byRarity[ctx.fish.rarity]||0)+1;m.byBait[ctx.baitId]=Number(m.byBait[ctx.baitId]||0)+1;if(rarityAtLeast(ctx.fish.rarity,"Rare"))m.rarePlus++;if(ctx.rodId==="pondcaster"&&ctx.clean)m.cleanPondcaster++;if(ctx.fish.id===19)m.ancientSnap++;if(ctx.fish.id===20)m.pondEater++;updateMasteryMenuBadge();}
+function claimMastery(id){const d=masteryDefs.find(x=>x.id===id);if(!d||S.masteryClaims.has(id)||!masteryTierUnlocked(d.tier)||!masteryComplete(id))return false;const r=d.reward||{};if(r.coins)S.coins+=r.coins;if(r.bait)S.baitInventory[r.bait.id]=Number(S.baitInventory[r.bait.id]||0)+r.bait.qty;if(r.cosmetic&&!S.cosmetics.unlocked.includes(r.cosmetic))S.cosmetics.unlocked.push(r.cosmetic);if(r.badge&&!S.cosmetics.unlocked.includes(r.badge))S.cosmetics.unlocked.push(r.badge);S.masteryClaims.add(id);if(r.xp)addXP(r.xp);save();render();renderMastery();updateMasteryMenuBadge();toast(`${d.name} claimed!`);haptic([25,30,45]);if(S.levelQueue.length){closeSystem("masteryOverlay");setTimeout(showNextLevelUp,250)}return true}
+function updateMasteryMenuBadge(){const el=$("masteryMenuBadge");if(!el)return;const n=masteryDefs.filter(d=>masteryTierUnlocked(d.tier)&&masteryComplete(d.id)&&!S.masteryClaims.has(d.id)).length;el.textContent=n?String(n):"";el.classList.toggle("show",n>0)}
+function renderMastery(){ensureMasteryData();const complete=masteryDefs.filter(d=>masteryComplete(d.id)).length,claimed=S.masteryClaims.size,pct=Math.round(complete/15*100);$("masteryCount").textContent=complete;$("masteryPct").textContent=`${pct}%`;$("masteryHeroSub").textContent=complete>=15?"WORLD MASTERED • Beyond mysteries remain.":`${complete}/15 complete • ${claimed} rewards claimed`;
+ for(let tier=1;tier<=3;tier++){const unlocked=masteryTierUnlocked(tier),wrap=$("masteryTier"+tier),list=$("masteryList"+tier);wrap.classList.toggle("locked",!unlocked);wrap.classList.toggle("unlocked",unlocked);if(tier>1)$("masteryTier"+tier+"State").textContent=unlocked?"UNLOCKED":`COMPLETE TIER ${tier===2?"I":"II"}`;list.innerHTML="";for(const d of masteryDefs.filter(x=>x.tier===tier)){const st=masteryState(d.id),isClaimed=S.masteryClaims.has(d.id),ready=unlocked&&st.complete&&!isClaimed,card=document.createElement("div");card.className=`masteryCard ${isClaimed?"claimed":ready?"ready":!unlocked?"locked":""}`;const pc=Math.min(100,st.target?st.value/st.target*100:0);card.innerHTML=`${isClaimed?'<div class="masteryStamp">CLAIMED ✓</div>':ready?'<div class="masteryStamp">REWARD READY!</div>':''}<div class="masteryTop"><div class="masteryNum">${d.id}</div><div class="masteryInfo"><div class="masteryName">${d.name}</div><div class="masteryReq">${d.req}</div></div></div><div class="masteryProgress"><div class="masteryFill" style="width:${pc}%"></div></div><div class="masteryFoot"><span class="masteryNumbers">${st.label||`${Math.min(st.value,st.target)} / ${st.target}`}</span><span class="masteryReward">${masteryRewardText(d.reward)}</span></div>${ready?`<button class="masteryClaim" data-masteryclaim="${d.id}">CLAIM REWARD</button>`:""}`;list.appendChild(card)}}
+ const beyond=S.masteryStats.pondEater>0,mastered=masteryComplete(15);$("beyondMastery").classList.toggle("revealed",beyond||mastered);$("beyondText").textContent=beyond?"POND EATER discovered • Prestige reward coming in v0.8.1":mastered?"??? • A presence still lurks below...":"Something beneath the pond...";updateMasteryMenuBadge();}
+
 function challengeGearName(id,type){return type==="bait"?(baitDefs[id]?.name||id):(rodDefs[id]?.name||id)}
 function unlockedBaits(){return Object.values(baitDefs).filter(b=>S.level>=b.unlock).map(b=>b.id)}
 function ownedRods(){return Object.values(rodDefs).filter(r=>S.ownedRods.has(r.id)).map(r=>r.id)}
@@ -1157,7 +1228,7 @@ function render(){
  $("coins").textContent=S.coins;$("level").textContent=S.level;$("xplabel").textContent=`${S.xp} / ${S.xpNeed} XP`;$("xpfill").style.width=Math.min(100,S.xp/S.xpNeed*100)+"%";
  const b=activeBait(),r=activeRod();$("baitName").textContent=b.name+" ▾";$("baitIcon").textContent=b.icon;$("bait").textContent=baitCount();$("rodName").textContent=r.name+" ▾";$("rodIcon").textContent=r.icon;
  $("hearts").textContent="❤️".repeat(S.hearts)+"🖤".repeat(3-S.hearts);$("hearts").style.display=(S.phase==="fight"||S.phase==="landing")?"block":"none";
- $("collectionBtn").disabled=$("shopBtn").disabled=$("challengesBtn").disabled=$("settingsBtn").disabled=$("baitBox").disabled=$("rodBox").disabled=S.phase!=="ready"||S.menuOpen;
+ $("collectionBtn").disabled=$("shopBtn").disabled=$("challengesBtn").disabled=$("masteryBtn").disabled=$("settingsBtn").disabled=$("baitBox").disabled=$("rodBox").disabled=S.phase!=="ready"||S.menuOpen;
  const btn=$("action");btn.disabled=false;btn.className="";
  if(S.phase==="ready"){btn.textContent="🎣";btn.disabled=baitCount()<=0||S.menuOpen;status(baitCount()?"Ready to cast.":"Out of bait.",baitCount()?`${activeRod().name} • ${b.name}`:"Visit the Shop for more bait.")}
  else if(S.phase==="casting"){btn.textContent="…";btn.disabled=true;status("Casting...","")}
@@ -1185,7 +1256,7 @@ function snapLineAndEscape(){clearMarker();S.inputLocked=true;const rod=$("rodPi
 function escape(msg){clearTimers();clearFightFx();hideHookedCreature();$("fight").classList.remove("show");$("bobber").classList.remove("bite");S.phase="ready";S.inputLocked=false;S.f=null;S.pull=0;S.reelKick=0;S.missKick=0;S.biteKick=0;S.fishOffsetX=0;S.fishOffsetY=0;S.fishTargetX=0;S.fishTargetY=0;S.fishNextTurn=0;const z=waterPoint();setBob(z.x,z.y);render();status(msg,"Cast again when you're ready.")}
 function addXP(n){S.xp+=n;while(S.xp>=S.xpNeed){S.xp-=S.xpNeed;S.level++;S.xpNeed=xpNeeds[S.level]||Math.round(50+18*Math.pow(S.level+1,2));const reward=50+S.level*10,baitReward=levelBaitReward(S.level);S.coins+=reward;S.baitInventory[baitReward.baitId]=(S.baitInventory[baitReward.baitId]||0)+baitReward.qty;S.levelQueue.push({level:S.level,coins:reward,baitId:baitReward.baitId,baitQty:baitReward.qty})}}
 function showNextLevelUp(){if(!S.levelQueue.length){$("levelOverlay").classList.remove("show");if(S.pendingCatchCard){S.pendingCatchCard=false;$("overlay").classList.add("show")}save();render();return}const item=S.levelQueue.shift(),b=baitDefs[item.baitId]||baitDefs.starter;$("levelReached").textContent=item.level;$("levelCoins").textContent=item.coins;$("levelBaitIcon").textContent=b.icon;$("levelBaitQty").textContent=item.baitQty||0;$("levelBaitName").textContent=b.name;$("levelOverlay").classList.add("show")}
-function caught(){clearTimers();clearFightFx();hideHookedCreature();$("fight").classList.remove("show");$("overlay").className="overlay rarity-"+S.f.rarity;const f=S.f,p=(S.weight-f.lb[0])/(f.lb[1]-f.lb[0]||1),c=Math.round(f.coins[0]+p*(f.coins[1]-f.coins[0])),fresh=!S.found.has(f.id),record=S.weight>(S.records[f.id]||0);S.first=false;S.found.add(f.id);S.counts[f.id]=(S.counts[f.id]||0)+1;if(record)S.records[f.id]=S.weight;S.coins+=c;updateChallengesForCatch({fish:f,weight:S.weight,baitId:S.equippedBait,rodId:S.equippedRod});addXP(f.xp);save();$("newtag").textContent=fresh?"NEW SPECIES!":record?"NEW RECORD!":"";$("rarity").textContent=f.rarity;$("rarity").style.color=rarityColor[f.rarity];$("art").innerHTML=artHTML(f,"swim");$("name").textContent=f.name;$("name").classList.toggle("longName",f.name.length>10);$("meta").textContent=`${S.weight.toFixed(2)} lb${record?" • New record":""}`;$("gaincoins").textContent=c;$("gainxp").textContent=f.xp;S.phase="caught";S.inputLocked=true;S.pull=0;render();status("Catch complete.","Rewards ready.");haptic([35,45,65]);splash();const leap=$("catchFish");leap.innerHTML=artHTML(f,"caught");leap.classList.remove("show");void leap.offsetWidth;leap.classList.add("show");setTimeout(()=>{leap.classList.remove("show");if(S.levelQueue.length){S.pendingCatchCard=true;showNextLevelUp()}else $("overlay").classList.add("show")},850)}
+function caught(){clearTimers();clearFightFx();hideHookedCreature();$("fight").classList.remove("show");$("overlay").className="overlay rarity-"+S.f.rarity;const f=S.f,p=(S.weight-f.lb[0])/(f.lb[1]-f.lb[0]||1),c=Math.round(f.coins[0]+p*(f.coins[1]-f.coins[0])),fresh=!S.found.has(f.id),record=S.weight>(S.records[f.id]||0);S.first=false;S.found.add(f.id);S.counts[f.id]=(S.counts[f.id]||0)+1;if(record)S.records[f.id]=S.weight;S.coins+=c;const catchCtx={fish:f,weight:S.weight,baitId:S.equippedBait,rodId:S.equippedRod,clean:S.hearts===3};updateMasteryForCatch(catchCtx);updateChallengesForCatch(catchCtx);addXP(f.xp);save();$("newtag").textContent=fresh?"NEW SPECIES!":record?"NEW RECORD!":"";$("rarity").textContent=f.rarity;$("rarity").style.color=rarityColor[f.rarity];$("art").innerHTML=artHTML(f,"swim");$("name").textContent=f.name;$("name").classList.toggle("longName",f.name.length>10);$("meta").textContent=`${S.weight.toFixed(2)} lb${record?" • New record":""}`;$("gaincoins").textContent=c;$("gainxp").textContent=f.xp;S.phase="caught";S.inputLocked=true;S.pull=0;render();status("Catch complete.","Rewards ready.");haptic([35,45,65]);splash();const leap=$("catchFish");leap.innerHTML=artHTML(f,"caught");leap.classList.remove("show");void leap.offsetWidth;leap.classList.add("show");setTimeout(()=>{leap.classList.remove("show");if(S.levelQueue.length){S.pendingCatchCard=true;showNextLevelUp()}else $("overlay").classList.add("show")},850)}
 function action(){if(S.phase==="ready")cast();else if(S.phase==="hook")hook();else if(S.phase==="fight")reel()}
 
 function openSystem(id){if(S.phase!=="ready")return;S.menuOpen=true;$(id).classList.add("show");render()}
@@ -1228,13 +1299,13 @@ function toggleSetting(key){settings[key]=!settings[key];saveSettings();applySet
 function resetGameData(){
  clearTimers();clearFightFx();
  localStorage.removeItem(SAVE_KEY);localStorage.removeItem(OLD_SAVE_KEY);localStorage.removeItem(OLDER_SAVE_KEY);
- const d=defaultSave();S.coins=d.coins;S.xp=d.xp;S.level=d.level;S.xpNeed=d.xpNeed;S.first=d.first;S.found=new Set();S.records={};S.counts={};S.baitInventory={...d.baitInventory};S.equippedBait=d.equippedBait;S.ownedRods=new Set(d.ownedRods);S.equippedRod=d.equippedRod;S.challenges=[];
+ const d=defaultSave();S.coins=d.coins;S.xp=d.xp;S.level=d.level;S.xpNeed=d.xpNeed;S.first=d.first;S.found=new Set();S.records={};S.counts={};S.baitInventory={...d.baitInventory};S.equippedBait=d.equippedBait;S.ownedRods=new Set(d.ownedRods);S.equippedRod=d.equippedRod;S.challenges=[];S.masteryStats={};S.masteryClaims=new Set();S.cosmetics={unlocked:[]};
  S.phase="ready";S.f=null;S.weight=0;S.need=0;S.done=0;S.hearts=3;S.inputLocked=false;S.menuOpen=false;S.levelQueue=[];S.pendingCatchCard=false;S.pull=0;S.reelKick=0;S.missKick=0;S.biteKick=0;
  ensureChallenges();save();setTimeout(updateChallengeMenuBadge,0);$("resetConfirm").classList.remove("show");$("settingsOverlay").classList.remove("show");const z=waterPoint();setBob(z.x,z.y);render();toast("Fresh game started!");haptic([30,45,30]);
 }
 $("baitBox").onclick=()=>openLoadout("bait");$("rodBox").onclick=()=>openLoadout("rod");$("loadoutClose").onclick=closeLoadout;$("loadoutSheet").addEventListener("click",e=>{if(e.target===$("loadoutSheet"))closeLoadout()});
 $("action").addEventListener("click",action);$("levelContinue").addEventListener("click",showNextLevelUp);$("again").addEventListener("click",()=>{$("overlay").classList.remove("show");S.phase="ready";S.inputLocked=false;S.f=null;S.pull=0;S.reelKick=0;S.missKick=0;S.biteKick=0;const z=waterPoint();setBob(z.x,z.y);render()});
-$("collectionBtn").onclick=()=>{renderCollection();openSystem("collectionOverlay")};$("challengesBtn").onclick=()=>{renderChallenges();openSystem("challengesOverlay")};$("challengesBack").onclick=()=>closeSystem("challengesOverlay");$("challengeList").addEventListener("click",e=>{const claim=e.target.closest("[data-claim]"),roll=e.target.closest("[data-reroll]");if(claim)claimChallenge(Number(claim.dataset.claim));if(roll)rerollChallenge(Number(roll.dataset.reroll))});
+$("collectionBtn").onclick=()=>{renderCollection();openSystem("collectionOverlay")};$("challengesBtn").onclick=()=>{renderChallenges();openSystem("challengesOverlay")};$("challengesBack").onclick=()=>closeSystem("challengesOverlay");$("masteryBtn").onclick=()=>{renderMastery();openSystem("masteryOverlay")};$("masteryBack").onclick=()=>closeSystem("masteryOverlay");$("masteryOverlay").addEventListener("click",e=>{const b=e.target.closest("[data-masteryclaim]");if(b)claimMastery(Number(b.dataset.masteryclaim))});$("challengeList").addEventListener("click",e=>{const claim=e.target.closest("[data-claim]"),roll=e.target.closest("[data-reroll]");if(claim)claimChallenge(Number(claim.dataset.claim));if(roll)rerollChallenge(Number(roll.dataset.reroll))});
 $("collectionBack").onclick=()=>closeSystem("collectionOverlay");$("detailClose").onclick=()=>$("detailOverlay").classList.remove("show");$("detailOverlay").addEventListener("click",e=>{if(e.target===$("detailOverlay"))$("detailOverlay").classList.remove("show")});
 $("settingsBtn").onclick=()=>{applySettings();openSystem("settingsOverlay")};$("settingsBack").onclick=()=>closeSystem("settingsOverlay");
 $("musicToggle").onclick=()=>toggleSetting("music");$("sfxToggle").onclick=()=>toggleSetting("sfx");$("hapticsToggle").onclick=()=>toggleSetting("haptics");$("motionToggle").onclick=()=>toggleSetting("reducedMotion");
@@ -1242,7 +1313,7 @@ $("resetDataBtn").onclick=()=>$("resetConfirm").classList.add("show");$("cancelR
 $("shopBtn").onclick=()=>{renderShop();openSystem("shopOverlay")};$("shopBack").onclick=()=>closeSystem("shopOverlay");document.querySelectorAll(".shopTab").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".shopTab").forEach(x=>x.classList.toggle("active",x===btn));document.querySelectorAll(".shopPane").forEach(x=>x.classList.toggle("active",x.id===btn.dataset.tab));renderShop()});
 $("shopOverlay").addEventListener("click",e=>{const b=e.target.closest("[data-equipbait]");if(b)equipBait(b.dataset.equipbait)});
 window.addEventListener("resize",()=>{if(S.phase==="ready"){const z=waterPoint();setBob(z.x,z.y)}});
-window.__PEBBLEFIN_TEST__={state:S,fish,baitDefs,rodDefs,chaseOdds,save,renderCollection,renderShop,renderChallenges,ensureChallenges,refreshChallenges,makeChallenge,updateChallengesForCatch,claimChallenge,rerollChallenge,challengeRerollCost,addXP,showNextLevelUp,
+window.__PEBBLEFIN_TEST__={state:S,fish,baitDefs,rodDefs,chaseOdds,save,renderCollection,renderShop,renderChallenges,renderMastery,masteryDefs,masteryState,masteryComplete,masteryTierUnlocked,updateMasteryForCatch,claimMastery,ensureMasteryData,ensureChallenges,refreshChallenges,makeChallenge,updateChallengesForCatch,claimChallenge,rerollChallenge,challengeRerollCost,addXP,showNextLevelUp,
  openLoadout,closeLoadout,
  setTestLevel(n){S.level=n;S.xp=0;S.xpNeed=xpNeeds[n]||S.xpNeed;save();render()},
  grantTestCoins(n){S.coins+=n;save();render()},
@@ -1250,7 +1321,7 @@ window.__PEBBLEFIN_TEST__={state:S,fish,baitDefs,rodDefs,chaseOdds,save,renderCo
  testCatch(id=1,weight=null,baitId=null,rodId=null){const f=fish.find(x=>x.id===id)||fish[0];updateChallengesForCatch({fish:f,weight:weight??((f.lb[0]+f.lb[1])/2),baitId:baitId||S.equippedBait,rodId:rodId||S.equippedRod});return S.challenges},grantTestXP(n){addXP(n);save();render();return S.levelQueue},
  resetTest(){localStorage.removeItem(SAVE_KEY);localStorage.removeItem(OLD_SAVE_KEY);localStorage.removeItem(OLDER_SAVE_KEY);location.reload()},resetGameData,toggleSetting,settings
 };
-ensureChallenges();applySettings();requestAnimationFrame(()=>requestAnimationFrame(()=>{const z=waterPoint();setBob(z.x,z.y);updateRod();updateLine();render();PondScene.init();rigLoop()}));
+ensureMasteryData();ensureChallenges();updateMasteryMenuBadge();applySettings();requestAnimationFrame(()=>requestAnimationFrame(()=>{const z=waterPoint();setBob(z.x,z.y);updateRod();updateLine();render();PondScene.init();rigLoop()}));
 })();
 
 
