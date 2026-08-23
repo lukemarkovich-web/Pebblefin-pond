@@ -1,4 +1,4 @@
-const CACHE='pebblefin-shell-v080';
+const CACHE='pebblefin-shell-v080-r2';
 const ASSETS=['./pebblefin-icon-192.png','./pebblefin-icon-512.png','./apple-touch-icon.png','./manifest.webmanifest'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).catch(()=>{}));});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{for(const k of await caches.keys())if(k!==CACHE)await caches.delete(k);await self.clients.claim();})());});

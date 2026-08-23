@@ -830,11 +830,126 @@ button:active{filter:brightness(1.08)}
 }
 
 
-/* ===== v0.8.0-r1 WORLD MASTERY ===== */
+/* ===== v0.8.0-r2 WORLD MASTERY ===== */
 .masteryHero{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(145deg,#173a42,#0d2831);border:2px solid rgba(122,220,194,.25);border-radius:20px;padding:14px 15px;margin-bottom:14px;box-shadow:0 5px 0 rgba(0,0,0,.12)}
 .masteryHero b{display:block;font-size:15px;letter-spacing:.5px;color:#effffd}.masteryHero small{display:block;color:#a9c9c6;font-weight:800;font-size:10px;margin-top:4px}.masteryRing{width:52px;height:52px;flex:0 0 52px;border-radius:50%;display:grid;place-items:center;background:#09212a;border:4px solid #62d3b8;color:#effffd;font-size:12px;font-weight:1000}
 .masteryTier{margin:12px 0 16px}.masteryTier.locked{opacity:.58}.masteryTierHead{display:flex;align-items:end;justify-content:space-between;padding:0 3px 7px;color:#e9fffb;font-weight:1000;font-size:12px;letter-spacing:.6px}.masteryTierHead small{font-size:8px;color:#83aaa7;letter-spacing:.5px}.masteryTier.unlocked .masteryTierHead small{color:#72ddb8}.masteryList{display:grid;gap:9px}.masteryCard{background:linear-gradient(145deg,#17333b,#10272f);border:2px solid rgba(255,255,255,.08);border-radius:18px;padding:11px 12px;position:relative;overflow:hidden;box-shadow:0 4px 0 rgba(0,0,0,.12)}.masteryCard.ready{border-color:#74d85d;background:linear-gradient(145deg,#183d38,#12342e)}.masteryCard.claimed{border-color:rgba(98,211,184,.32)}.masteryCard.locked{filter:saturate(.65)}
 .masteryTop{display:flex;gap:10px;align-items:flex-start}.masteryNum{width:34px;height:34px;flex:0 0 34px;border-radius:11px;background:#09212a;display:grid;place-items:center;color:#70dbc0;font-weight:1000;font-size:12px}.masteryInfo{flex:1;min-width:0}.masteryName{color:#f1fffd;font-size:14px;font-weight:1000;line-height:1.12}.masteryReq{color:#a8c7c5;font-size:10px;font-weight:750;line-height:1.3;margin-top:3px}.masteryProgress{height:10px;background:#071e27;border-radius:999px;overflow:hidden;margin-top:9px;border:1px solid rgba(255,255,255,.08)}.masteryFill{height:100%;background:linear-gradient(90deg,#55d6bb,#a0e64d);transition:width .2s}.masteryFoot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px}.masteryNumbers{font-size:9px;color:#9ebfbd;font-weight:1000}.masteryReward{font-size:9px;color:#dff8f3;font-weight:1000;text-align:right}.masteryClaim{width:100%;margin-top:9px;border:0;border-radius:12px;min-height:36px;background:#66d34b;box-shadow:0 3px 0 #3ea42c;color:#17333e;font-size:11px;font-weight:1000}.masteryStamp{position:absolute;right:9px;top:8px;color:#6dd6bd;font-size:8px;font-weight:1000;letter-spacing:.7px}.beyondMastery{display:flex;align-items:center;gap:12px;margin:8px 0 20px;padding:13px;border-radius:18px;background:linear-gradient(135deg,#1d2638,#2e2140,#173b3b);border:2px solid rgba(211,176,255,.22)}.beyondIcon{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#0b1721;color:#e5caff;font-weight:1000;font-size:20px}.beyondMastery b{display:block;color:#f4eaff;font-size:12px;letter-spacing:1px}.beyondMastery small{display:block;color:#baa9c8;font-size:9px;font-weight:800;margin-top:3px}.beyondMastery.revealed{border-color:rgba(255,215,92,.4)}
+
+/* ===== v0.8.0-r2 RARITY IDENTITY POLISH ===== */
+
+/* Collection cards: rarity should read instantly without sacrificing the native dark UI. */
+.fishSlot{
+  border-width:3px!important;
+  border-color:var(--rarity,#8d989d)!important;
+  background:
+    radial-gradient(circle at 50% 38%,color-mix(in srgb,var(--rarity,#8d989d) 20%,transparent),transparent 58%),
+    linear-gradient(180deg,rgba(19,56,66,.98),rgba(7,31,41,.99))!important;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb,var(--rarity,#8d989d) 22%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 0 15px color-mix(in srgb,var(--rarity,#8d989d) 16%,transparent),
+    0 5px 0 rgba(1,18,25,.26)!important;
+}
+.fishSlot:after{
+  content:"";position:absolute;left:10px;right:10px;top:0;height:3px;border-radius:0 0 6px 6px;
+  background:var(--rarity,#8d989d);opacity:.9;pointer-events:none;
+  box-shadow:0 0 10px color-mix(in srgb,var(--rarity,#8d989d) 55%,transparent);
+}
+.fishSlot .slotRarity{
+  display:inline-block!important;
+  width:auto!important;
+  margin:5px auto 0!important;
+  padding:3px 7px!important;
+  border-radius:999px!important;
+  color:#fff!important;
+  background:color-mix(in srgb,var(--rarity,#8d989d) 72%,#071e27)!important;
+  border:1px solid color-mix(in srgb,var(--rarity,#8d989d) 74%,white)!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.45)!important;
+  box-shadow:0 0 9px color-mix(in srgb,var(--rarity,#8d989d) 20%,transparent)!important;
+}
+.fishSlot.locked{
+  border-color:color-mix(in srgb,var(--rarity,#8d989d) 55%,#42545a)!important;
+}
+.fishSlot.locked .slotRarity{opacity:.68!important}
+
+/* Basics stay intentionally neutral gray. */
+.fishSlot[style*="#8d989d"]{
+  background:
+    radial-gradient(circle at 50% 38%,rgba(141,152,157,.16),transparent 58%),
+    linear-gradient(180deg,#29404a,#142a33)!important;
+}
+
+/* Beyond gets an unmistakable prestige treatment. */
+.fishSlot.beyond{
+  background:
+    radial-gradient(circle at 50% 36%,rgba(92,226,255,.22),transparent 48%),
+    linear-gradient(135deg,#172844,#282047,#123d48,#34213f)!important;
+  background-size:220% 220%!important;
+  animation:rarityBeyondShift 5s ease-in-out infinite!important;
+}
+@keyframes rarityBeyondShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* Fish details: stronger frame + badge + aura. */
+.detailCard{
+  border-color:var(--rarity,#8d989d)!important;
+  box-shadow:
+    0 0 0 2px color-mix(in srgb,var(--rarity,#8d989d) 22%,transparent),
+    0 0 30px color-mix(in srgb,var(--rarity,#8d989d) 22%,transparent),
+    0 20px 55px rgba(0,0,0,.42)!important;
+}
+.detailRarity{
+  display:inline-block!important;
+  margin:1px auto 7px!important;
+  padding:5px 11px!important;
+  border-radius:999px!important;
+  color:#fff!important;
+  background:color-mix(in srgb,var(--rarity,#8d989d) 75%,#071e27)!important;
+  border:1px solid color-mix(in srgb,var(--rarity,#8d989d) 72%,white)!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.42)!important;
+  box-shadow:0 0 12px color-mix(in srgb,var(--rarity,#8d989d) 25%,transparent)!important;
+}
+.detailArt{
+  background:
+    radial-gradient(circle at 50% 53%,color-mix(in srgb,var(--rarity,#8d989d) 22%,transparent),rgba(7,30,39,.15) 58%,rgba(7,30,39,.38) 100%)!important;
+  border:1px solid color-mix(in srgb,var(--rarity,#8d989d) 26%,transparent)!important;
+}
+
+/* Catch reveal: rarity becomes part of the celebration again. */
+.overlay .card{
+  border-color:var(--catch,#8d989d)!important;
+  box-shadow:
+    0 0 0 2px color-mix(in srgb,var(--catch,#8d989d) 24%,transparent),
+    0 0 38px color-mix(in srgb,var(--catch,#8d989d) 34%,transparent),
+    0 22px 55px rgba(0,0,0,.48)!important;
+}
+.overlay .cardtop{
+  background:
+    radial-gradient(circle at 50% 57%,rgba(255,255,255,.10),transparent 40%),
+    linear-gradient(160deg,color-mix(in srgb,var(--catch,#8d989d) 58%,#153945),color-mix(in srgb,var(--catch2,#667176) 54%,#071f29))!important;
+}
+.overlay .rarity{
+  display:inline-block!important;
+  padding:4px 10px!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--catch,#8d989d) 72%,rgba(4,24,32,.86))!important;
+  border:1px solid rgba(255,255,255,.36)!important;
+  color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.42)!important;
+  box-shadow:0 0 12px color-mix(in srgb,var(--catch,#8d989d) 32%,transparent)!important;
+}
+
+/* Beyond catch card keeps its animated rainbow identity. */
+.overlay.rarity-Beyond .card{
+  border-color:#9d6dff!important;
+  box-shadow:0 0 45px rgba(88,202,255,.28),0 0 32px rgba(198,86,255,.28),0 22px 55px rgba(0,0,0,.48)!important;
+}
+.overlay.rarity-Beyond .cardtop{
+  background:linear-gradient(120deg,#5833a8,#177fa7,#8540a9,#967422,#5833a8)!important;
+  background-size:300% 300%!important;
+  animation:beyondCatch 3s linear infinite!important;
+}
+
 </style>
 
 <!-- Pebblefin Pond PWA -->
@@ -855,7 +970,7 @@ button:active{filter:brightness(1.08)}
    <div class="pill levelPill"><small>RANK</small><b id="level">0</b></div>
  </div>
  <div class="xp"><div class="xpfill" id="xpfill"></div><div class="xplabel" id="xplabel">0 / 50 XP</div></div>
- <div class="version">v0.8.0-r1</div>
+ <div class="version">v0.8.0-r2</div>
  <div class="menuBtns">
    <button class="menuBtn" id="collectionBtn" aria-label="Collection"><span class="navGlyph">◆</span><small>FISH</small></button>
    <button class="menuBtn" id="shopBtn" aria-label="Shop"><span class="navGlyph">¤</span><small>SHOP</small></button>
@@ -1064,9 +1179,17 @@ const masteryDefs=[
 function freshMasteryStats(){return{total:0,byRarity:{},byBait:{starter:0,grub:0},cleanPondcaster:0,rarePlus:0,ancientSnap:0,pondEater:0}}
 function ensureMasteryData(){
  const m=Object.assign(freshMasteryStats(),S.masteryStats||{});m.byRarity=Object.assign({},m.byRarity||{});m.byBait=Object.assign({starter:0,grub:0},m.byBait||{});
- const historicalTotal=Object.values(S.counts||{}).reduce((a,b)=>a+Number(b||0),0);m.total=Math.max(Number(m.total||0),historicalTotal);
- for(const f of fish){const n=Number(S.counts[f.id]||0);m.byRarity[f.rarity]=Math.max(Number(m.byRarity[f.rarity]||0),Object.entries(S.counts||{}).filter(([id])=>(fish.find(x=>x.id===Number(id))||{}).rarity===f.rarity).reduce((a,[,v])=>a+Number(v||0),0))}
- m.rarePlus=Math.max(Number(m.rarePlus||0),["Rare","Epic","Legendary","Beyond"].reduce((a,r)=>a+Number(m.byRarity[r]||0),0));m.ancientSnap=Math.max(Number(m.ancientSnap||0),Number(S.counts[19]||0));m.pondEater=Math.max(Number(m.pondEater||0),Number(S.counts[20]||0));S.masteryStats=m;
+ // Species catch counts are the authoritative source for totals/rarities.
+ // Reconcile them exactly so an older v0.8 save with doubled rarity progress repairs itself automatically.
+ const historicalTotal=Object.values(S.counts||{}).reduce((a,b)=>a+Number(b||0),0);m.total=historicalTotal;
+ for(const rarity of ["Basic","Uncommon","Rare","Epic","Legendary","Beyond"]){
+   m.byRarity[rarity]=Object.entries(S.counts||{}).reduce((sum,[id,v])=>{
+     const f=fish.find(x=>x.id===Number(id));
+     return sum+(f&&f.rarity===rarity?Number(v||0):0);
+   },0);
+ }
+ m.rarePlus=["Rare","Epic","Legendary","Beyond"].reduce((a,r)=>a+Number(m.byRarity[r]||0),0);
+ m.ancientSnap=Number(S.counts[19]||0);m.pondEater=Number(S.counts[20]||0);S.masteryStats=m;
  if(!S.cosmetics||typeof S.cosmetics!=="object")S.cosmetics={unlocked:[]};if(!Array.isArray(S.cosmetics.unlocked))S.cosmetics.unlocked=[];
 }
 function rarityFoundCount(r){return fish.filter(f=>f.rarity===r&&S.found.has(f.id)).length}
@@ -1089,7 +1212,7 @@ function masteryState(id){
 function masteryComplete(id){if(id===15){const found=fish.filter(f=>f.rarity!=="Beyond"&&S.found.has(f.id)).length;return masteryDefs.slice(0,14).every(d=>masteryState(d.id).complete)&&found>=19}return masteryState(id).complete}
 function masteryTierUnlocked(t){if(t===1)return true;if(t===2)return masteryDefs.filter(d=>d.tier===1).every(d=>masteryComplete(d.id));return masteryDefs.filter(d=>d.tier<=2).every(d=>masteryComplete(d.id))}
 function masteryRewardText(r){const a=[];if(r.coins)a.push(`🪙 ${r.coins}`);if(r.xp)a.push(`✨ ${r.xp} XP`);if(r.bait)a.push(`${baitDefs[r.bait.id]?.icon||"🪱"} ×${r.bait.qty}`);if(r.cosmetic)a.push(`🎨 ${r.cosmetic}`);if(r.badge)a.push(`🏅 ${r.badge}`);return a.join(" • ")}
-function updateMasteryForCatch(ctx){ensureMasteryData();const m=S.masteryStats;m.total++;m.byRarity[ctx.fish.rarity]=Number(m.byRarity[ctx.fish.rarity]||0)+1;m.byBait[ctx.baitId]=Number(m.byBait[ctx.baitId]||0)+1;if(rarityAtLeast(ctx.fish.rarity,"Rare"))m.rarePlus++;if(ctx.rodId==="pondcaster"&&ctx.clean)m.cleanPondcaster++;if(ctx.fish.id===19)m.ancientSnap++;if(ctx.fish.id===20)m.pondEater++;updateMasteryMenuBadge();}
+function updateMasteryForCatch(ctx){const m=S.masteryStats;m.total++;m.byRarity[ctx.fish.rarity]=Number(m.byRarity[ctx.fish.rarity]||0)+1;m.byBait[ctx.baitId]=Number(m.byBait[ctx.baitId]||0)+1;if(rarityAtLeast(ctx.fish.rarity,"Rare"))m.rarePlus++;if(ctx.rodId==="pondcaster"&&ctx.clean)m.cleanPondcaster++;if(ctx.fish.id===19)m.ancientSnap++;if(ctx.fish.id===20)m.pondEater++;updateMasteryMenuBadge();}
 function claimMastery(id){const d=masteryDefs.find(x=>x.id===id);if(!d||S.masteryClaims.has(id)||!masteryTierUnlocked(d.tier)||!masteryComplete(id))return false;const r=d.reward||{};if(r.coins)S.coins+=r.coins;if(r.bait)S.baitInventory[r.bait.id]=Number(S.baitInventory[r.bait.id]||0)+r.bait.qty;if(r.cosmetic&&!S.cosmetics.unlocked.includes(r.cosmetic))S.cosmetics.unlocked.push(r.cosmetic);if(r.badge&&!S.cosmetics.unlocked.includes(r.badge))S.cosmetics.unlocked.push(r.badge);S.masteryClaims.add(id);if(r.xp)addXP(r.xp);save();render();renderMastery();updateMasteryMenuBadge();toast(`${d.name} claimed!`);haptic([25,30,45]);if(S.levelQueue.length){closeSystem("masteryOverlay");setTimeout(showNextLevelUp,250)}return true}
 function updateMasteryMenuBadge(){const el=$("masteryMenuBadge");if(!el)return;const n=masteryDefs.filter(d=>masteryTierUnlocked(d.tier)&&masteryComplete(d.id)&&!S.masteryClaims.has(d.id)).length;el.textContent=n?String(n):"";el.classList.toggle("show",n>0)}
 function renderMastery(){ensureMasteryData();const complete=masteryDefs.filter(d=>masteryComplete(d.id)).length,claimed=S.masteryClaims.size,pct=Math.round(complete/15*100);$("masteryCount").textContent=complete;$("masteryPct").textContent=`${pct}%`;$("masteryHeroSub").textContent=complete>=15?"WORLD MASTERED • Beyond mysteries remain.":`${complete}/15 complete • ${claimed} rewards claimed`;
@@ -1256,7 +1379,7 @@ function snapLineAndEscape(){clearMarker();S.inputLocked=true;const rod=$("rodPi
 function escape(msg){clearTimers();clearFightFx();hideHookedCreature();$("fight").classList.remove("show");$("bobber").classList.remove("bite");S.phase="ready";S.inputLocked=false;S.f=null;S.pull=0;S.reelKick=0;S.missKick=0;S.biteKick=0;S.fishOffsetX=0;S.fishOffsetY=0;S.fishTargetX=0;S.fishTargetY=0;S.fishNextTurn=0;const z=waterPoint();setBob(z.x,z.y);render();status(msg,"Cast again when you're ready.")}
 function addXP(n){S.xp+=n;while(S.xp>=S.xpNeed){S.xp-=S.xpNeed;S.level++;S.xpNeed=xpNeeds[S.level]||Math.round(50+18*Math.pow(S.level+1,2));const reward=50+S.level*10,baitReward=levelBaitReward(S.level);S.coins+=reward;S.baitInventory[baitReward.baitId]=(S.baitInventory[baitReward.baitId]||0)+baitReward.qty;S.levelQueue.push({level:S.level,coins:reward,baitId:baitReward.baitId,baitQty:baitReward.qty})}}
 function showNextLevelUp(){if(!S.levelQueue.length){$("levelOverlay").classList.remove("show");if(S.pendingCatchCard){S.pendingCatchCard=false;$("overlay").classList.add("show")}save();render();return}const item=S.levelQueue.shift(),b=baitDefs[item.baitId]||baitDefs.starter;$("levelReached").textContent=item.level;$("levelCoins").textContent=item.coins;$("levelBaitIcon").textContent=b.icon;$("levelBaitQty").textContent=item.baitQty||0;$("levelBaitName").textContent=b.name;$("levelOverlay").classList.add("show")}
-function caught(){clearTimers();clearFightFx();hideHookedCreature();$("fight").classList.remove("show");$("overlay").className="overlay rarity-"+S.f.rarity;const f=S.f,p=(S.weight-f.lb[0])/(f.lb[1]-f.lb[0]||1),c=Math.round(f.coins[0]+p*(f.coins[1]-f.coins[0])),fresh=!S.found.has(f.id),record=S.weight>(S.records[f.id]||0);S.first=false;S.found.add(f.id);S.counts[f.id]=(S.counts[f.id]||0)+1;if(record)S.records[f.id]=S.weight;S.coins+=c;const catchCtx={fish:f,weight:S.weight,baitId:S.equippedBait,rodId:S.equippedRod,clean:S.hearts===3};updateMasteryForCatch(catchCtx);updateChallengesForCatch(catchCtx);addXP(f.xp);save();$("newtag").textContent=fresh?"NEW SPECIES!":record?"NEW RECORD!":"";$("rarity").textContent=f.rarity;$("rarity").style.color=rarityColor[f.rarity];$("art").innerHTML=artHTML(f,"swim");$("name").textContent=f.name;$("name").classList.toggle("longName",f.name.length>10);$("meta").textContent=`${S.weight.toFixed(2)} lb${record?" • New record":""}`;$("gaincoins").textContent=c;$("gainxp").textContent=f.xp;S.phase="caught";S.inputLocked=true;S.pull=0;render();status("Catch complete.","Rewards ready.");haptic([35,45,65]);splash();const leap=$("catchFish");leap.innerHTML=artHTML(f,"caught");leap.classList.remove("show");void leap.offsetWidth;leap.classList.add("show");setTimeout(()=>{leap.classList.remove("show");if(S.levelQueue.length){S.pendingCatchCard=true;showNextLevelUp()}else $("overlay").classList.add("show")},850)}
+function caught(){clearTimers();clearFightFx();hideHookedCreature();$("fight").classList.remove("show");$("overlay").className="overlay rarity-"+S.f.rarity;const f=S.f,p=(S.weight-f.lb[0])/(f.lb[1]-f.lb[0]||1),c=Math.round(f.coins[0]+p*(f.coins[1]-f.coins[0])),fresh=!S.found.has(f.id),record=S.weight>(S.records[f.id]||0);S.first=false;S.found.add(f.id);ensureMasteryData();S.counts[f.id]=(S.counts[f.id]||0)+1;if(record)S.records[f.id]=S.weight;S.coins+=c;const catchCtx={fish:f,weight:S.weight,baitId:S.equippedBait,rodId:S.equippedRod,clean:S.hearts===3};updateMasteryForCatch(catchCtx);updateMasteryMenuBadge();updateChallengesForCatch(catchCtx);addXP(f.xp);save();$("newtag").textContent=fresh?"NEW SPECIES!":record?"NEW RECORD!":"";$("rarity").textContent=f.rarity;$("rarity").style.color=rarityColor[f.rarity];$("art").innerHTML=artHTML(f,"swim");$("name").textContent=f.name;$("name").classList.toggle("longName",f.name.length>10);$("meta").textContent=`${S.weight.toFixed(2)} lb${record?" • New record":""}`;$("gaincoins").textContent=c;$("gainxp").textContent=f.xp;S.phase="caught";S.inputLocked=true;S.pull=0;render();status("Catch complete.","Rewards ready.");haptic([35,45,65]);splash();const leap=$("catchFish");leap.innerHTML=artHTML(f,"caught");leap.classList.remove("show");void leap.offsetWidth;leap.classList.add("show");setTimeout(()=>{leap.classList.remove("show");if(S.levelQueue.length){S.pendingCatchCard=true;showNextLevelUp()}else $("overlay").classList.add("show")},850)}
 function action(){if(S.phase==="ready")cast();else if(S.phase==="hook")hook();else if(S.phase==="fight")reel()}
 
 function openSystem(id){if(S.phase!=="ready")return;S.menuOpen=true;$(id).classList.add("show");render()}
